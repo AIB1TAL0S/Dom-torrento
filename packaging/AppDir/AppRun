@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
-# AppImage entrypoint — delegates to the PyInstaller-bundled binary.
+# AppImage entrypoint.
+# When launched without arguments (double-click in file manager) → open GUI.
+# Arguments are forwarded as-is for CLI use: e.g. LocalTorrent.AppImage create /path
 HERE="$(dirname "$(readlink -f "${0}")")"
-exec "${HERE}/localtorrent" "$@"
+if [ $# -eq 0 ]; then
+    exec "${HERE}/localtorrent" gui
+else
+    exec "${HERE}/localtorrent" "$@"
+fi
