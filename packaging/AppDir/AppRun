@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# AppImage entrypoint — delegates to the PyInstaller-bundled binary.
+HERE="$(dirname "$(readlink -f "${0}")")"
+exec "${HERE}/localtorrent" "$@"

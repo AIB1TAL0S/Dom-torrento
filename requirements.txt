@@ -1,0 +1,3 @@
+# LocalTorrent uses only Python standard library — no external runtime dependencies.
+# Build dependencies (install manually for local builds):
+#   pip install pyinstaller

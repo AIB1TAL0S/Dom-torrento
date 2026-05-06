@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=LocalTorrent
+Comment=Local network P2P file sharing
+Exec=localtorrent gui
+Icon=localtorrent
+Type=Application
+Categories=Network;FileTransfer;
+Terminal=false

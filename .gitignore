@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# PyInstaller build artefacts
+build/
+dist/
+*.spec.bak
+
+# Virtual environments
+.venv/
+.venv-build/
+venv/
+env/
+
+# Packaging tools (downloaded at build time)
+packaging/appimagetool-*.AppImage
+
+# Compiled binary copied into AppDir by the build script
+packaging/AppDir/localtorrent
+packaging/AppDir/.DirIcon
+
+# IDE / OS
+.idea/
+.vscode/
+*.DS_Store
