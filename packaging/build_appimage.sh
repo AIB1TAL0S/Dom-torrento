@@ -30,18 +30,18 @@ source "${VENV_DIR}/bin/activate"
 pip install --quiet --upgrade pyinstaller
 echo "    PyInstaller $(pyinstaller --version) ready."
 
-# Find appimagetool (either in PATH or in packaging/)
+# Find appimagetool — check PATH, then /tmp (avoids gitignore issues)
 APPIMAGETOOL=""
 if command -v appimagetool >/dev/null 2>&1; then
     APPIMAGETOOL="appimagetool"
-elif [ -f "${SCRIPT_DIR}/appimagetool-x86_64.AppImage" ]; then
-    APPIMAGETOOL="${SCRIPT_DIR}/appimagetool-x86_64.AppImage"
+elif [ -f "/tmp/appimagetool-x86_64" ]; then
+    APPIMAGETOOL="/tmp/appimagetool-x86_64"
 else
-    echo "WARNING: appimagetool not found. Downloading..."
+    echo "    Downloading appimagetool to /tmp..."
     wget -q "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage" \
-        -O "${SCRIPT_DIR}/appimagetool-x86_64.AppImage"
-    chmod +x "${SCRIPT_DIR}/appimagetool-x86_64.AppImage"
-    APPIMAGETOOL="${SCRIPT_DIR}/appimagetool-x86_64.AppImage"
+        -O "/tmp/appimagetool-x86_64"
+    chmod +x "/tmp/appimagetool-x86_64"
+    APPIMAGETOOL="/tmp/appimagetool-x86_64"
 fi
 
 echo "==> [2/5] Building PyInstaller binary..."
