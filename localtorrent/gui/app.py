@@ -149,17 +149,12 @@ class LocalTorrentApp(tk.Tk):
 
     def on_closing(self):
         logger.info("GUI closing, stopping engine...")
-        # Disable window to prevent interaction during shutdown
-        self.attributes('-disabled', True)
-        self.update() 
-        
+        # Signal the background asyncio loop to stop.
+        # EngineThread is a daemon thread — it will be killed automatically
+        # when the main process exits, so we don't block on join().
         self.engine.stop()
-        self.engine.join(timeout=3.0) 
-        
-        if self.engine.is_alive():
-            logger.warning("Engine thread did not close gracefully in time.")
-            
         self.destroy()
+
 
 def run_gui():
     log_file = _setup_gui_logging()
