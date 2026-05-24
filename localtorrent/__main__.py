@@ -98,7 +98,7 @@ async def run_node(torrent_file: str, output_dir: str, tcp_port: int, seeding: b
 
 def main():
     parser = argparse.ArgumentParser(description="LocalTorrent CLI")
-    subparsers = parser.add_subparsers(dest="command", required=True)
+    subparsers = parser.add_subparsers(dest="command", required=False)
     
     parser_create = subparsers.add_parser("create")
     parser_create.add_argument("path", help="Path to file or directory")
@@ -115,6 +115,11 @@ def main():
     parser_gui = subparsers.add_parser("gui", help="Launch the graphical interface")
     
     args = parser.parse_args()
+    
+    if args.command is None:
+        from localtorrent.gui.app import run_gui
+        run_gui()
+        return
     
     if args.command == "create":
         logging.info(f"Creating torrent for {args.path}")
